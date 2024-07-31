@@ -19,7 +19,7 @@ enum Emoji {
 model Review  {
   id            String    @default(cuid()) @id
   name          String
-  number        String       @unique
+  number        String       
   state         String
   district      String
   pincode       String

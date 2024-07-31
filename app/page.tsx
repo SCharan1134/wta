@@ -34,8 +34,8 @@ const Page = async () => {
         <section className="mt-4 max-md:mt-10 max-md:max-w-full">
           <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
             {reviews.map((review, index) => (
-              <Popover>
-                <HoverCard key={index}>
+              <Popover key={index}>
+                <HoverCard>
                   <PopoverTrigger>
                     <HoverCardTrigger>
                       <ReviewCard content={review.reviewText} {...review} />

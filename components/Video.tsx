@@ -18,7 +18,7 @@ import axios from "axios";
 import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
-  video: z.instanceof(File, { message: "Upload a video first" }).nullable(),
+  video: z.string(),
 });
 
 const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
@@ -35,7 +35,10 @@ const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
         if (videoElement.duration <= 65) {
           setVideoFile(file);
         } else {
-          alert("Video duration exceeds 65 seconds.");
+          toast({
+            variant: "destructive",
+            description: "Video duration exceeds 65 seconds.",
+          });
         }
       };
     }
@@ -64,7 +67,7 @@ const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      video: null,
+      video: "",
     },
   });
 
@@ -102,7 +105,7 @@ const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
                       type="file"
                       accept="video/*"
                       onChange={handleFileChange}
-                      disabled={status === "recording"} // Disable input while recording
+                      disabled={isloading}
                     />
                   </FormControl>
                   <FormMessage />
