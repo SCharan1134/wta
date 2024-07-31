@@ -1,0 +1,33 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+enum Emoji {
+  SAD
+  HAPPY
+  EXCITED
+}
+
+model Review  {
+  id            String    @default(cuid()) @id
+  name          String
+  number        String       @unique
+  state         String
+  district      String
+  pincode       String
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  emoji         Emoji
+  reviewText    String
+  hasVideo      Boolean
+  videoPath     String
+  @@map(name: "reviews")
+}
