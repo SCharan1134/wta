@@ -33,6 +33,7 @@ const ReviewStats: React.FC = async () => {
           value={(sadReviews / totalReviews) * 100}
           className="lg:w-[300px] w-[300px] h-3"
         />
+        <p>sadReviews</p>
       </div>
       <div className="flex items-center">
         <p className="text-2xl">😀</p>
@@ -40,6 +41,7 @@ const ReviewStats: React.FC = async () => {
           value={(happyReviews / totalReviews) * 100}
           className="lg:w-[300px] w-[300px] h-3"
         />
+        <p>{happyReviews}</p>
       </div>
       <div className="flex  items-center">
         <p className="text-2xl">😍</p>
@@ -47,6 +49,7 @@ const ReviewStats: React.FC = async () => {
           value={(excitedReviews / totalReviews) * 100}
           className="lg:w-[300px] w-[300px] h-3"
         />
+        <p>{excitedReviews}</p>
       </div>
       <p className="self-start mt-2 text-xl font-medium text-black max-md:max-w-full">
         Total {totalReviews} reviews
