@@ -12,7 +12,18 @@ const Header = () => {
       <Link href="/">
         <img src="/wta-logo.png" alt="WTA Logo" />
       </Link>
-      <Button onClick={() => router.push("/addreview")}>Add Review</Button>
+      <div className="flex gap-5">
+        <Button
+          onClick={() =>
+            router.push(
+              "https://docs.google.com/spreadsheets/d/1gQBWfCnWBcYQSojPqVslgO8mrvbbUxTuv6AjqSFVeoI/edit?gid=0#gid=0"
+            )
+          }
+        >
+          Google Sheets
+        </Button>
+        <Button onClick={() => router.push("/addreview")}>Add Review</Button>
+      </div>
     </header>
   );
 };

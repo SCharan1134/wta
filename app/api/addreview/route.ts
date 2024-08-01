@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { google } from "googleapis";
 
 const createReviewSchema = z.object({
   name: z.string().min(2),
@@ -21,19 +22,64 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ status: 400 });
   }
 
-  const newReview = await prisma.review.create({
-    data: {
-      name: body.name,
-      number: body.number,
-      state: body.state,
-      district: body.district,
-      pincode: body.pincode,
-      emoji: body.emoji,
-      reviewText: body.reviewText,
-      hasVideo: body.hasVideo,
-      videoPath: body.videoPath,
-    },
-  });
+  try {
+    const newReview = await prisma.review.create({
+      data: {
+        name: body.name,
+        number: body.number,
+        state: body.state,
+        district: body.district,
+        pincode: body.pincode,
+        emoji: body.emoji,
+        reviewText: body.reviewText,
+        hasVideo: body.hasVideo,
+        videoPath: body.videoPath,
+      },
+    });
 
-  return NextResponse.json(newReview, { status: 201 });
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      },
+      scopes: [
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/spreadsheets",
+      ],
+    });
+
+    const sheets = google.sheets({
+      auth,
+      version: "v4",
+    });
+
+    const response = await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "A1:I1",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [
+          [
+            body.name,
+            body.number,
+            body.state,
+            body.district,
+            body.pincode,
+            body.emoji,
+            body.reviewText,
+            body.hasVideo,
+            body.videoPath,
+          ],
+        ],
+      },
+    });
+
+    console.log(response);
+
+    return NextResponse.json(newReview, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ status: 500, message: "Internal Server Error" });
+  }
 }
