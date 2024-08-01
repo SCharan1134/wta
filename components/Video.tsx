@@ -84,7 +84,7 @@ const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
   };
 
   return (
-    <section className="px-20 py-5 relative">
+    <section className="sm:px-20 px-5 py-5 relative">
       {isloading ? (
         <div className="absolute top-0 right-0 w-full h-screen bg-white opacity-50 flex items-center justify-center">
           <p className="text-4xl">Loading</p>
@@ -92,7 +92,7 @@ const Video = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
       ) : (
         <>
           <h1 className="text-3xl mt-10">Upload</h1>
-          <div className="w-5/12 mt-5 px-5">
+          <div className="sm:w-5/12 w-full mt-5 sm:px-5 px-1">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(handleFormSubmit)}

@@ -8,11 +8,11 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <header className="w-full h-20 flex justify-between px-20 items-center">
+    <header className="w-full h-20 flex justify-between sm:px-20 px-5 items-center">
       <Link href="/">
-        <img src="/wta-logo.png" alt="WTA Logo" />
+        <img src="/wta-logo.png" alt="WTA Logo" className="h-10" />
       </Link>
-      <div className="flex gap-5">
+      <div className="flex gap-5 sm:gap-1">
         <Button
           onClick={() =>
             router.push(

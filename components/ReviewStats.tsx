@@ -26,16 +26,16 @@ const ReviewStats: React.FC = async () => {
   const { totalReviews, sadReviews, happyReviews, excitedReviews } =
     await getReviewStats();
   return (
-    <div className="flex flex-col items-end pl-12 mt-5 max-md:pl-5 max-md:mt-5 max-md:max-w-full gap-3">
-      <div className="flex items-center">
+    <div className="flex flex-col items-center justify-start pl-12 mt-5 max-md:pl-5 max-md:mt-5 max-md:max-w-full gap-3">
+      <div className="flex items-center gap-2 justify-start">
         <p className="text-2xl">🥲</p>
         <Progress
           value={(sadReviews / totalReviews) * 100}
-          className="lg:w-[300px] w-[300px] h-3"
+          className="lg:w-[300px] w-[300px] h-3 "
         />
         <p>{sadReviews}</p>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2 justify-start">
         <p className="text-2xl">😀</p>
         <Progress
           value={(happyReviews / totalReviews) * 100}
@@ -43,7 +43,7 @@ const ReviewStats: React.FC = async () => {
         />
         <p>{happyReviews}</p>
       </div>
-      <div className="flex  items-center">
+      <div className="flex  items-center gap-2 justify-start">
         <p className="text-2xl">😍</p>
         <Progress
           value={(excitedReviews / totalReviews) * 100}

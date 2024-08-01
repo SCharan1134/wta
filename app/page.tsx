@@ -11,6 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useState } from "react";
 
 const getReviews = async () => {
   const reviews = await prisma.review.findMany();
@@ -19,6 +20,7 @@ const getReviews = async () => {
 
 const Page = async () => {
   const reviews = await getReviews();
+  // const [reviews, setReviews] = useState<any[]>([]);
 
   return (
     <main className="flex justify-center items-center px-16 pb-5  bg-white max-md:px-5">

@@ -71,9 +71,9 @@ const UserDetails = ({ onSubmit }: { onSubmit: (data: any) => void }) => {
     onSubmit(values);
   }
   return (
-    <section className="px-20 py-5">
+    <section className="sm:px-20 px-5 py-5">
       <h1 className="text-3xl mt-10">User Details</h1>
-      <div className="w-5/12 mt-5 px-5">
+      <div className="sm:w-5/12 w-full mt-5 sm:px-5 px-1">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleFormSubmit)}
