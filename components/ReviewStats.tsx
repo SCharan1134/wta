@@ -33,7 +33,7 @@ const ReviewStats: React.FC = async () => {
           value={(sadReviews / totalReviews) * 100}
           className="lg:w-[300px] w-[300px] h-3"
         />
-        <p>sadReviews</p>
+        <p>{sadReviews}</p>
       </div>
       <div className="flex items-center">
         <p className="text-2xl">😀</p>
